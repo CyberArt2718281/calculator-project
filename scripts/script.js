@@ -115,6 +115,20 @@ window.onload = function() {
     updateDisplay();
 };
 
+function appendOperator(operator) {
+    let lastChar = currentInput[currentInput.length - 1];
+
+    if (isOperator(lastChar)) {
+        currentInput = currentInput.slice(0, -1) + operator;
+    } else if (currentInput !== '' && !isNaN(currentInput[currentInput.length - 1])) {
+        currentInput += operator;
+    } else if (operator === '-' && currentInput === '') {
+        currentInput += operator;
+    }
+
+    updateDisplay();
+}
+
 window.onbeforeunload = function() {
     localStorage.setItem('calculatorInput', currentInput);
 };
