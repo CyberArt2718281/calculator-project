@@ -1,0 +1,35 @@
+@media (max-width: 440px) {
+    .container {
+        padding: 5px;
+    }
+
+    .calculator {
+        width: 100%;
+        max-width: 300px;
+        padding: 10px;
+    }
+
+    #display {
+        height: 40px;
+        font-size: 18px;
+        padding-right: 5px;
+    }
+
+    .buttons {
+        gap: 5px;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+
+    .theme-toggle {
+        font-size: 12px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+}
