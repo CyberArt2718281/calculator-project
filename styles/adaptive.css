@@ -12,17 +12,17 @@
 
     #display {
         height: 40px;
-        width: 97%;
+        width: 97.5%;
         font-size: 18px;
         padding-right: 5px;
     }
 
     .buttons {
-        gap: 5px;
+        gap: 10px;
     }
 
     button {
-        padding: 12px;
+        padding: 20px;
         font-size: 14px;
         border-radius: 8px;
     }
