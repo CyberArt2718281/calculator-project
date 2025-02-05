@@ -13,6 +13,7 @@
     #display {
         height: 45px;
         width: 97.5%;
+        max-width: 300px;
         font-size: 18px;
         padding-right: 5px;
     }
@@ -24,7 +25,7 @@
     button {
         padding: 20px;
         font-size: 14px;
-        border-radius: 8px;
+    
     }
 
     .theme-toggle {
