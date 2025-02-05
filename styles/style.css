@@ -9,19 +9,9 @@ body {
     background-size: 400% 400%;
     animation: gradient 10s ease infinite;
     transition: all 0.3s ease;
+    overflow-x: hidden;
 }
 
-@keyframes gradient{
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
 
 .calculator {
     width: 350px;
@@ -42,8 +32,21 @@ body {
     background-clip: text;
     -webkit-background-clip: text;
     background-size: 400% 400%;
-    animation: gradient 10s ease infinite;
+    animation: gradient 15s ease infinite;
 }
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
 
 #display {
     height: 50px;
@@ -70,6 +73,7 @@ button {
     padding: 20px;
     font-size: 18px;
     border: none;
+    outline: none;
     border-radius: 12px;
     background-color: rgba(255, 255, 255, 0.8);
     color: #6933dc;
@@ -104,9 +108,7 @@ button:active {
 }
 
 .dark-theme {
-    background: linear-gradient(135deg, #000000,#1a1919,#4c484a,#272626,#000000);
-    background-size: 400% 400%;
-    animation: gradient 10s ease infinite;
+    background: linear-gradient(135deg, #393737, #4c484a, #272626);
 }
 
 
@@ -128,20 +130,15 @@ button:active {
 }
 
 .dark-theme #display {
-    background: linear-gradient(135deg, #000000,#1a1919,#4c484a,#272626,#000000);    background-size: 400% 400%;
+    background: #1A1919FF;
     color: #fff;
 }
 
 .dark-theme .title {
-    text-align: center;
-    color: transparent;
-    font-weight: bold;
-    margin-bottom: 10px;
-    background: linear-gradient(90deg, #000000,#1a1919,#4c484a,#272626,#000000);
+    background: linear-gradient(90deg, #2b2a2a, #1a1919, #b5afb0, #272626, #000000);
     background-clip: text;
     -webkit-background-clip: text;
     background-size: 400% 400%;
-    animation: gradient 10s ease infinite;
 }
 
 .dark-theme .operator-button {
@@ -159,7 +156,7 @@ button:active {
 
 .theme-toggle {
     color: black;
-    background-color: rgba(255,255,255,.5);
+    background-color: rgba(255, 255, 255, .5);
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -173,6 +170,6 @@ button:active {
     color: white;
 }
 
-.zero{
+.zero {
     grid-column: 1/3;
 }
