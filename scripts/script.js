@@ -79,8 +79,10 @@ function isOperator(char) {
 }
 
 function saveToMemory() {
-    memoryValue = parseFloat(display.value);
-    localStorage.setItem('memoryValue', memoryValue.toString());
+        if (display.value !== '') {
+            memoryValue = parseFloat(display.value);
+            localStorage.setItem('memoryValue', memoryValue.toString());
+        }
 }
 
 function recallFromMemory() {
@@ -115,6 +117,10 @@ window.onload = function() {
     updateDisplay();
 };
 
+window.onbeforeunload = function() {
+    localStorage.setItem('calculatorInput', currentInput);
+};
+
 function appendOperator(operator) {
     let lastChar = currentInput[currentInput.length - 1];
 
@@ -128,10 +134,6 @@ function appendOperator(operator) {
 
     updateDisplay();
 }
-
-window.onbeforeunload = function() {
-    localStorage.setItem('calculatorInput', currentInput);
-};
 
 document.addEventListener('keydown', function(event) {
     const key = event.key;
@@ -147,4 +149,3 @@ document.addEventListener('keydown', function(event) {
         clearDisplay();
     }
 });
-
