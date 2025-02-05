@@ -1,10 +1,8 @@
 let display = document.getElementById('display');
 let currentInput = '';
 let savedInput = localStorage.getItem('calculatorInput') || '';
-let memoryValue = Number(localStorage.getItem('memoryValue')) || 0;
+let memoryValue = localStorage.getItem('memoryValue') || 0;
 let theme = localStorage.getItem('theme') || 'light';
-
-const operators = ['+', '-', '*', '/', '^'];
 
 if (theme === 'dark') {
     document.body.classList.add('dark-theme');
@@ -27,14 +25,15 @@ function deleteLast() {
 
 function calculateResult() {
     if (!isValidExpression(currentInput)) {
-        currentInput = 'Invalid Expression';
+        currentInput = 'Некорректное выражение';
         updateDisplay();
         currentInput = '';
         return;
     }
 
+
     if (currentInput.includes('/0')) {
-        currentInput = 'Division by zero';
+        currentInput = 'Ошибка';
         updateDisplay();
         currentInput = '';
         return;
@@ -45,32 +44,35 @@ function calculateResult() {
         updateDisplay();
     } catch (error) {
         if (error instanceof SyntaxError) {
-            currentInput = 'Syntax Error';
+            currentInput = 'Ошибка';
             updateDisplay();
             currentInput = '';
         } else {
-            console.error("Unknown error:", error);
-            currentInput = 'Error';
+            console.error("Неизвестная ошибка:", error);
+            currentInput = 'Ошибка';
             updateDisplay();
             currentInput = '';
         }
     }
 }
-
 function isValidExpression(expression) {
     for (let i = 0; i < expression.length - 1; i++) {
-        if (operators.includes(expression[i]) && operators.includes(expression[i + 1])) {
+        if (isOperator(expression[i]) && isOperator(expression[i + 1])) {
             return false;
         }
     }
     return true;
 }
 
+function isOperator(char) {
+    return ['+', '-', '*', '/', '^'].includes(char);
+}
+
 function saveToMemory() {
-    if (display.value !== '') {
-        memoryValue = parseFloat(display.value);
-        localStorage.setItem('memoryValue', memoryValue.toString());
-    }
+        if (display.value !== '') {
+            memoryValue = parseFloat(display.value);
+            localStorage.setItem('memoryValue', memoryValue.toString());
+        }
 }
 
 function recallFromMemory() {
@@ -83,36 +85,46 @@ function clearMemory() {
     localStorage.removeItem('memoryValue');
 }
 
+function updateToggleIcon() {
+    const toggleButton = document.querySelector('.theme-toggle');
+    if (theme === 'light') {
+        toggleButton.innerHTML = '🌙'; 
+    } else {
+        toggleButton.innerHTML = '☀️';
+    }
+}
+
+updateToggleIcon();
+
 function toggleTheme() {
     if (theme === 'light') {
         document.body.classList.add('dark-theme');
         theme = 'dark';
-        document.querySelector('.theme-toggle').innerHTML = '🌙';
     } else {
         document.body.classList.remove('dark-theme');
         theme = 'light';
-        document.querySelector('.theme-toggle').innerHTML = '☀️';
     }
     localStorage.setItem('theme', theme);
+    updateToggleIcon();
 }
 
 function updateDisplay() {
     display.value = currentInput;
 }
 
-window.onload = function () {
+window.onload = function() {
     currentInput = savedInput;
     updateDisplay();
 };
 
-window.onbeforeunload = function () {
+window.onbeforeunload = function() {
     localStorage.setItem('calculatorInput', currentInput);
 };
 
 function appendOperator(operator) {
     let lastChar = currentInput[currentInput.length - 1];
 
-    if (operators.includes(lastChar)) {
+    if (isOperator(lastChar)) {
         currentInput = currentInput.slice(0, -1) + operator;
     } else if (currentInput !== '' && !isNaN(currentInput[currentInput.length - 1])) {
         currentInput += operator;
@@ -123,11 +135,11 @@ function appendOperator(operator) {
     updateDisplay();
 }
 
-document.addEventListener('keydown', function (event) {
+document.addEventListener('keydown', function(event) {
     const key = event.key;
     if (key >= '0' && key <= '9') {
         appendNumber(key);
-    } else if (operators.includes(key)) {
+    } else if (['+', '-', '*', '/', '^'].includes(key)) {
         appendOperator(key);
     } else if (key === 'Enter') {
         calculateResult();
@@ -137,3 +149,4 @@ document.addEventListener('keydown', function (event) {
         clearDisplay();
     }
 });
+
