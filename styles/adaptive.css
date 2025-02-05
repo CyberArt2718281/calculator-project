@@ -4,6 +4,7 @@
     }
 
     .calculator {
+        width: 100%;
         max-width: 300px;
         padding: 10px;
         margin: 0 10px;
@@ -11,7 +12,7 @@
 
     #display {
         height: 45px;
-        max-width: 300px;
+        width: 97.5%;
         font-size: 18px;
         padding-right: 5px;
     }
